@@ -1,0 +1,32 @@
+import Ananke
+import time
+import json
+
+sdk = Ananke.Ananke()
+led = 0
+
+
+def onConnect(status):
+    if status:
+        print 'connected'
+    else:
+        print 'not connected'
+
+
+def onMessage(message):
+    print "message : " + message
+
+file=open("registration.txt","r")
+file=json.load(file)
+
+
+
+
+sdk.begin(onConnect, onMessage, file['username'], file['password'], file['a'], file['d'], file['g'])
+
+
+while True:
+
+    time.sleep(1)
+    sdk.send_message('This is a test program');
+
